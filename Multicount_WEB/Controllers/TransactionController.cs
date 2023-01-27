@@ -10,6 +10,7 @@ using Multicount_WEB.Services.IServices;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Security.Claims;
 
 namespace Multicount_WEB.Controllers
 {
@@ -58,6 +59,7 @@ namespace Multicount_WEB.Controllers
         {
             if (ModelState.IsValid)
             {
+                var test = HttpContext.User.FindFirstValue("userId");
                 var response = await _transactionService.CreateAsync<APIResponse>(model.Transaction, HttpContext.Session.GetString(SD.SessionToken));
                 if (response is not null && response.IsSuccess)
                 {

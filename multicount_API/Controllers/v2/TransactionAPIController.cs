@@ -60,7 +60,9 @@ namespace multicount_API.Controllers.v2
                 {
                     return BadRequest(createDTO);
                 }
+                var userId = HttpContext.User.Claims.FirstOrDefault(t => t.Type == "userId").Value;
                 Transaction transaction = _mapper.Map<Transaction>(createDTO);
+                transaction.UserId = userId;
                 transaction.CreatedDate = DateTime.Now;
                 await _dbTransaction.CreateAsync(transaction);
                 _response.Result = _mapper.Map<TransactionDTO>(transaction);
@@ -129,8 +131,9 @@ namespace multicount_API.Controllers.v2
                     ModelState.AddModelError("ErrorMessages", "CategoryId is invalid!");
                     return BadRequest(ModelState);
                 }
-
+                var userId = HttpContext.User.Claims.FirstOrDefault(t => t.Type == "userId").Value;
                 Transaction model = _mapper.Map<Transaction>(updateDTO);
+                model.UserId = userId;
                 model.UpdatedDate= DateTime.Now;
                 await _dbTransaction.UpdateAsync(model);
                 _response.StatusCode = HttpStatusCode.NoContent;

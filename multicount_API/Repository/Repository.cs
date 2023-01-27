@@ -13,7 +13,6 @@ namespace multicount_API.Repository
         public Repository(ApplicationDbContext db)
         {
             _db = db;
-            //_db.Transactions.Include(u => u.Category).ToList();
             this.dbSet = _db.Set<T>();
         }
         public async Task CreateAsync(T entity)
