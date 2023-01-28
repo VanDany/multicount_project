@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using multicount_API.Logging;
 using multicount_API.Models;
+using multicount_API.Models.Dto;
 using multicount_API.Repository.IRepository;
 using System.Net;
 
@@ -46,6 +47,37 @@ namespace multicount_API.Controllers.v2
                 _response.Result = _mapper.Map<List<TransactionsUsers>>(transactionsUsersList);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages
+                    = new List<string> { ex.Message.ToString() };
+            }
+            return _response;
+        }
+        [HttpPost]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<APIResponse>> PostTransactionsUsers([FromBody] TransactionsUsersCreateDTO createDTO)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                if (createDTO is null)
+                {
+                    return BadRequest(createDTO);
+                }
+                TransactionsUsers transactionsUsers = _mapper.Map<TransactionsUsers>(createDTO);
+
+                await _dbTransactionUser.CreateAsync(transactionsUsers);
+                _response.Result = _mapper.Map<TransactionsUsersDTO>(transactionsUsers);
+                _response.StatusCode = HttpStatusCode.Created;
             }
             catch (Exception ex)
             {
