@@ -63,9 +63,9 @@ namespace multicount_API.Controllers.v1
                 Pagination pagination = new() { PageNumber = pageNumber, PageSize = pageSize };
 
                 Response.Headers.Add("Pagination", JsonSerializer.Serialize(pagination));
-                foreach (var trasaction in transactionsList)
+                foreach (var transaction in transactionsList)
                 {
-                    trasaction.TransactionsUsers = transactionUser;
+                    transaction.TransactionsUsers = transactionUser.Where(t => t.TransactionId == transaction.Id).ToList();
                 }
                 _response.Result = _mapper.Map<List<TransactionDTO>>(transactionsList);
                 _response.StatusCode = HttpStatusCode.OK;
@@ -97,7 +97,7 @@ namespace multicount_API.Controllers.v1
                     return BadRequest();
                 }
                 var transaction = await _dbTransaction.GetAsync(u => u.Id == id, includeProperties: "Category,LocalUser,TransactionsUsers");
-                var transactionUser = await _dbTransactionUser.GetAllAsync(includeProperties: "LocalUser");
+                var transactionUser = await _dbTransactionUser.GetAllAsync(t => t.TransactionId == transaction.Id, includeProperties: "LocalUser");
                 if (transaction == null)
                 {
                     return NotFound();

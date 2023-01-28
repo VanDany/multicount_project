@@ -30,6 +30,9 @@
                 <th>
                     CreatedDate
                 </th>
+                <th>
+                    Who ?
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -43,6 +46,10 @@
                     <td>@item.CategoryId</td>
                     <td>@item.Category.Name</td>
                     <td>@item.CreatedDate</td>
+                    @foreach(var subItem in item.TransactionsUsers)
+                    {
+                        <td>@subItem.LocalUser.Name</td>
+                    }
                     <td>
                         <a asp-controller="Transaction" asp-action="UpdateTransaction" asp-route-transactionId="@item.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
                         <a asp-controller="Transaction" asp-action="DeleteTransaction" asp-route-transactionId="@item.Id" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
