@@ -20,7 +20,7 @@ namespace multicount_API.Mapping
 
             CreateMap<TransactionsUsers, TransactionsUsersCreateDTO>().ReverseMap();
 
-            CreateMap<LocalUser, LocalUser>()
+            CreateMap<LocalUser, LocalUserDTO>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
@@ -36,6 +36,10 @@ namespace multicount_API.Mapping
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+
+            CreateMap<LocalUser, LocalUserCreateDTO>().ReverseMap();
+            CreateMap<LocalUser, LocalUserUpdateDTO>().ReverseMap();
+
         }
     }
 }
