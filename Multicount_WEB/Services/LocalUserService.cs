@@ -6,14 +6,14 @@ using Newtonsoft.Json.Linq;
 
 namespace Multicount_WEB.Services
 {
-    public class CategoryService : BaseService, ICategoryService
+    public class LocalUserService : BaseService, ILocalUserService
     {
         private readonly IHttpClientFactory _clientFactory;
-        private string categoryUrl;
-        public CategoryService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory)
+        private string localUserUrl;
+        public LocalUserService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory)
         {
             _clientFactory = clientFactory;
-            categoryUrl = configuration.GetValue<string>("ServiceUrls:MulticountAPI");
+            localUserUrl = configuration.GetValue<string>("ServiceUrls:MulticountAPI");
         }
 
         public Task<T> CreateAsync<T>(LocalUserCreateDTO dto, string token)
@@ -22,7 +22,7 @@ namespace Multicount_WEB.Services
             {
                 ApiType = SD.ApiType.POST,
                 Data= dto,
-                Url= categoryUrl+"/api/v1/Category",
+                Url= localUserUrl+"/api/v2/LocalUser",
                 Token = token
             });
         }
@@ -32,7 +32,7 @@ namespace Multicount_WEB.Services
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = categoryUrl + "/api/v1/Category/" + id,
+                Url = localUserUrl + "/api/v2/LocalUser/" + id,
                 Token = token
             });
         }
@@ -42,7 +42,7 @@ namespace Multicount_WEB.Services
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = categoryUrl + "/api/v1/Category",
+                Url = localUserUrl + "/api/v2/LocalUser",
                 Token = token
             });
         }
@@ -52,18 +52,18 @@ namespace Multicount_WEB.Services
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = categoryUrl + "/api/v1/Category/" + id,
+                Url = localUserUrl + "/api/v2/LocalUser/" + id,
                 Token = token
             });
         }
 
-        public Task<T> UpdateAsync<T>(CategoryUpdateDTO dto, string token)
+        public Task<T> UpdateAsync<T>(LocalUserUpdateDTO dto, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.PUT,
                 Data = dto,
-                Url = categoryUrl + "/api/v1/Category/" + dto.Id,
+                Url = localUserUrl + "/api/v2/LocalUser/" + dto.Id,
                 Token = token
             });
         }

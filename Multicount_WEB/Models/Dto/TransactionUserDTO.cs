@@ -8,6 +8,6 @@ namespace Multicount_WEB.Models.Dto
         public int Id { get; set; }
         public int TransactionId { get; set; }
         public string UserId { get; set; }
-        public LocalUserDTO LocalUser { get; set; }
+        public LocalUserUpdateDTO LocalUser { get; set; }
     }
 }

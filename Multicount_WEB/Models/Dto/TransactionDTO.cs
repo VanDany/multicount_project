@@ -12,7 +12,7 @@ namespace Multicount_WEB.Models.Dto
         [Required]
         public int? CategoryId { get; set; }
         public CategoryDTO Category { get; set; }
-        public LocalUserDTO LocalUser { get; set; }
+        public LocalUserUpdateDTO LocalUser { get; set; }
         public List<TransactionUserDTO> TransactionsUsers { get; set; }
         [Required]
         public string Amount { get; set; }

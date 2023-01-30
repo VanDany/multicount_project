@@ -41,7 +41,7 @@ namespace Multicount_WEB.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCategory(CategoryCreateDTO model)
+        public async Task<IActionResult> CreateCategory(LocalUserCreateDTO model)
         {
             if (ModelState.IsValid)
             {

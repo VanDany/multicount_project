@@ -11,7 +11,7 @@ namespace multicount_WEB.Mapping
             CreateMap<TransactionDTO, TransactionCreateDTO>().ReverseMap();
             CreateMap<TransactionDTO, TransactionUpdateDTO>().ReverseMap();
 
-            CreateMap<CategoryDTO, CategoryCreateDTO>().ReverseMap();
+            CreateMap<CategoryDTO, LocalUserCreateDTO>().ReverseMap();
             CreateMap<CategoryDTO, CategoryUpdateDTO>().ReverseMap();
         }
     }

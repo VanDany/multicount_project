@@ -18,13 +18,15 @@ namespace Multicount_WEB.Controllers
     {
         private readonly ITransactionService _transactionService;
         private readonly ICategoryService _categoryService;
+        private readonly ILocalUserService _localUserService;
         private readonly IMapper _mapper;
 
-        public TransactionController(ICategoryService categoryService,ITransactionService transactionService, IMapper mapper)
+        public TransactionController(ICategoryService categoryService,ITransactionService transactionService, ILocalUserService localUserService, IMapper mapper)
         {
             _transactionService = transactionService;
             _categoryService = categoryService;
             _mapper = mapper;
+            _localUserService = localUserService;
         }
 
         public async Task<IActionResult> IndexTransaction()
@@ -45,6 +47,16 @@ namespace Multicount_WEB.Controllers
             if (response is not null && response.IsSuccess)
             {
                 transactionCreateVM.CategoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(Convert.ToString(response.Result)).Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                });
+            }
+
+            var responseTransac = await _localUserService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
+            if (responseTransac is not null && responseTransac.IsSuccess)
+            {
+                transactionCreateVM.TransactionList = JsonConvert.DeserializeObject<List<CategoryDTO>>(Convert.ToString(responseTransac.Result)).Select(i => new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()

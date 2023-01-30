@@ -2,7 +2,7 @@
 
 namespace Multicount_WEB.Services.IServices
 {
-    public interface ICategoryService
+    public interface ILocalUserService
     {
         Task<T> GetAllAsync<T>(string token);
         Task<T> GetAsync<T>(int id, string token);

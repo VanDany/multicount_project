@@ -6,10 +6,10 @@ namespace Multicount_WEB.Models.VM
 {
     public class CategoryCreateVM
     {
-        public CategoryCreateDTO Category { get; set; }
+        public LocalUserCreateDTO Category { get; set; }
         public CategoryCreateVM()
         {
-            Category = new CategoryCreateDTO();
+            Category = new LocalUserCreateDTO();
         }
     }
 }
