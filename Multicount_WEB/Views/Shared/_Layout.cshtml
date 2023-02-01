@@ -32,6 +32,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="IndexCategory">Categories</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LocalUser" asp-action="IndexLocalUser">Users</a>
+                        </li>
                         @if (httpAcc.HttpContext.Session.GetString(SD.SessionToken) is not null && httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
                         {
                             <li class="nav-item">

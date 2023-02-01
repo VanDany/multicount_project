@@ -2,7 +2,7 @@
 
 namespace Multicount_WEB.Models.Dto
 {
-    public class LocalUserCreateDTO
+    public class CategoryCreateDTO
     {
         public int Id { get; set; }
         [Required]
