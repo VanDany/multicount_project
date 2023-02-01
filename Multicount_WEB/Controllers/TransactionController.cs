@@ -56,7 +56,7 @@ namespace Multicount_WEB.Controllers
             var responseTransac = await _localUserService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (responseTransac is not null && responseTransac.IsSuccess)
             {
-                transactionCreateVM.TransactionList = JsonConvert.DeserializeObject<List<CategoryDTO>>(Convert.ToString(responseTransac.Result)).Select(i => new SelectListItem
+                transactionCreateVM.UsersId = JsonConvert.DeserializeObject<List<LocalUserDTO>>(Convert.ToString(responseTransac.Result)).Select(i => new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()

@@ -39,9 +39,7 @@
                 <label asp-for="Transaction.UsersId" class="control-label pt-2" style="font-size: 20px;"></label>
             </div>
             <div class="col-10 pb-3">
-                <select asp-for="Transaction.UsersId" class="form-select" asp-items="@Model.TransactionList">
-                    <option disabled>--Select Users--</option>
-                </select>
+                @Html.ListBoxFor(s=>s.Transaction.UsersId,Model.UsersId)
                 <span asp-validation-for="Transaction.UsersId" class="text-danger"></span>
             </div>
             <div class="col-5 offset-2">

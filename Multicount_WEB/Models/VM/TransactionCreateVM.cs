@@ -10,8 +10,7 @@ namespace Multicount_WEB.Models.VM
         [ValidateNever]
         public IEnumerable<SelectListItem> CategoryList { get; set; }
         [ValidateNever]
-        public IEnumerable<SelectListItem> TransactionList { get; set; }
-
+        public IEnumerable<SelectListItem> UsersId { get; set; }
         public TransactionCreateVM()
         {
             Transaction = new TransactionCreateDTO();
