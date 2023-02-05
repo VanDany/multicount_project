@@ -19,14 +19,16 @@ namespace Multicount_WEB.Controllers
         private readonly ITransactionService _transactionService;
         private readonly ICategoryService _categoryService;
         private readonly ILocalUserService _localUserService;
+        private readonly ITransactionUserService _transactionUserService;
         private readonly IMapper _mapper;
 
-        public TransactionController(ICategoryService categoryService,ITransactionService transactionService, ILocalUserService localUserService, IMapper mapper)
+        public TransactionController(ICategoryService categoryService,ITransactionService transactionService, ILocalUserService localUserService, ITransactionUserService transactionUserService, IMapper mapper)
         {
             _transactionService = transactionService;
             _categoryService = categoryService;
             _mapper = mapper;
             _localUserService = localUserService;
+            _transactionUserService= transactionUserService;
         }
 
         public async Task<IActionResult> IndexTransaction()
@@ -71,13 +73,24 @@ namespace Multicount_WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                var test = HttpContext.User.FindFirstValue("userId");
+                //var test = HttpContext.User.FindFirstValue("userId");
+                var userId1 = model.Transaction.UsersId;
                 var response = await _transactionService.CreateAsync<APIResponse>(model.Transaction, HttpContext.Session.GetString(SD.SessionToken));
                 if (response is not null && response.IsSuccess)
                 {
+                    foreach (var user in userId1)
+                    {
+                        TransactionUserCreateDTO newTransactionUser = new TransactionUserCreateDTO
+                        {
+                            UserId = user,
+                            TransactionId = JsonConvert.DeserializeObject<TransactionDTO>(Convert.ToString(response.Result)).Id
+                        };
+                        var responseTransactionUser = await _transactionUserService.CreateAsync<APIResponse>(newTransactionUser, HttpContext.Session.GetString(SD.SessionToken));
+                    }
                     TempData["success"] = "Transaction created successfully";
                     return RedirectToAction(nameof(IndexTransaction));
                 }
+
                 else
                 {
                     if (response.ErrorMessages.Count > 0 )
