@@ -12,6 +12,8 @@ namespace multicount_API.Models.Dto
         [Required]
         public int? CategoryId { get; set; }
         [Required]
+        public int GroupId { get; set; }
+        [Required]
         public float Amount { get; set; }
         public DateTime CreatedDate { get; set; }
     }

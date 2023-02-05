@@ -9,6 +9,7 @@ namespace multicount_API.Models.Dto
         public string Description { get; set; }
         public int CategoryId { get; set; }
         public string UserId { get; set; }
+        public int GroupId { get; set; }
         public float Amount { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
