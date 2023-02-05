@@ -16,6 +16,8 @@ namespace multicount_API.Data
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<TransactionsUsers> TransactionsUsers { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<GroupsUsers> GroupsUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {

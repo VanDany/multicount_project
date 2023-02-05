@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using multicount_API.Data;
 
@@ -11,9 +12,11 @@ using multicount_API.Data;
 namespace multicountAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230205150957_Add Groups")]
+    partial class AddGroups
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,8 +256,8 @@ namespace multicountAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CreatorUserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -345,7 +348,7 @@ namespace multicountAPI.Migrations
                             Id = 1,
                             Amount = 51.12f,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2023, 2, 5, 16, 35, 28, 889, DateTimeKind.Local).AddTicks(2445),
+                            CreatedDate = new DateTime(2023, 2, 5, 16, 9, 57, 27, DateTimeKind.Local).AddTicks(9363),
                             Description = "Raclette",
                             GroupId = 0,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -356,7 +359,7 @@ namespace multicountAPI.Migrations
                             Id = 2,
                             Amount = 5.75f,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2023, 2, 5, 16, 35, 28, 889, DateTimeKind.Local).AddTicks(2474),
+                            CreatedDate = new DateTime(2023, 2, 5, 16, 9, 57, 27, DateTimeKind.Local).AddTicks(9394),
                             Description = "Bananes pour tous",
                             GroupId = 0,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -367,7 +370,7 @@ namespace multicountAPI.Migrations
                             Id = 3,
                             Amount = 450.11f,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2023, 2, 5, 16, 35, 28, 889, DateTimeKind.Local).AddTicks(2476),
+                            CreatedDate = new DateTime(2023, 2, 5, 16, 9, 57, 27, DateTimeKind.Local).AddTicks(9395),
                             Description = "Chauffage",
                             GroupId = 0,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -378,7 +381,7 @@ namespace multicountAPI.Migrations
                             Id = 4,
                             Amount = 23.59f,
                             CategoryId = 4,
-                            CreatedDate = new DateTime(2023, 2, 5, 16, 35, 28, 889, DateTimeKind.Local).AddTicks(2478),
+                            CreatedDate = new DateTime(2023, 2, 5, 16, 9, 57, 27, DateTimeKind.Local).AddTicks(9397),
                             Description = "Casseroles",
                             GroupId = 0,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -389,7 +392,7 @@ namespace multicountAPI.Migrations
                             Id = 5,
                             Amount = 684.42f,
                             CategoryId = 5,
-                            CreatedDate = new DateTime(2023, 2, 5, 16, 35, 28, 889, DateTimeKind.Local).AddTicks(2480),
+                            CreatedDate = new DateTime(2023, 2, 5, 16, 9, 57, 27, DateTimeKind.Local).AddTicks(9398),
                             Description = "Isolation",
                             GroupId = 0,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),

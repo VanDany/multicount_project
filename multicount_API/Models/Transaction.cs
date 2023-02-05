@@ -14,6 +14,8 @@ namespace multicount_API.Models
         public int? CategoryId { get; set; }
         [ForeignKey("LocalUser")]
         public string UserId { get; set; }
+        [ForeignKey("Group")]
+        public int GroupId { get; set; }
         public Category Category { get; set; }
         public LocalUser LocalUser { get; set; }
         public List<TransactionsUsers> TransactionsUsers { get; set; }

@@ -1,14 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace multicount_API.Models
+namespace multicount_API.Models.Dto
 {
-    public class Group
+    public class GroupUpdateDTO
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string CreatorUserId { get; set; }
+        [Required]
         public string Description { get; set; }
     }
 }

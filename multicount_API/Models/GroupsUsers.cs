@@ -9,8 +9,9 @@ namespace multicount_API.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [ForeignKey("Group")]
-        public int TransactionId { get; set; }
-        [ForeignKey("ApplicationUser")]
+        public int GroupId { get; set; }
+        [ForeignKey("LocalUser")]
         public int UserId { get; set; }
+        public float Amount { get; set; }
     }
 }
