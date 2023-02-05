@@ -1,27 +1,28 @@
 ﻿using Multicount_Utility;
-using Multicount_WEB.Models;
 using Multicount_WEB.Models.Dto;
+using Multicount_WEB.Models;
 using Multicount_WEB.Services.IServices;
+using Newtonsoft.Json.Linq;
 
 namespace Multicount_WEB.Services
 {
-    public class TransactionService : BaseService, ITransactionService
+    public class GroupService : BaseService, IGroupService
     {
         private readonly IHttpClientFactory _clientFactory;
-        private string transactionUrl;
-        public TransactionService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory)
+        private string groupUrl;
+        public GroupService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory)
         {
             _clientFactory = clientFactory;
-            transactionUrl = configuration.GetValue<string>("ServiceUrls:MulticountAPI");
+            groupUrl = configuration.GetValue<string>("ServiceUrls:MulticountAPI");
         }
 
-        public Task<T> CreateAsync<T>(TransactionCreateDTO dto, string token)
+        public Task<T> CreateAsync<T>(GroupCreateDTO dto, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.POST,
                 Data= dto,
-                Url= transactionUrl+"/api/v2/Transaction",
+                Url= groupUrl + "/api/v2/Group",
                 Token = token
             });
         }
@@ -31,17 +32,17 @@ namespace Multicount_WEB.Services
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = transactionUrl + "/api/v2/Transaction/" + id,
+                Url = groupUrl + "/api/v2/Group/" + id,
                 Token = token
             });
         }
 
-        public Task<T> GetAllAsync<T>(int groupId, string token)
+        public Task<T> GetAllAsync<T>(string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = transactionUrl + "/api/v1/Transaction?filterGroup="+groupId,
+                Url = groupUrl + "/api/v2/Group",
                 Token = token
             });
         }
@@ -51,18 +52,18 @@ namespace Multicount_WEB.Services
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = transactionUrl + "/api/v1/Transaction/" + id,
+                Url = groupUrl + "/api/v2/Group/" + id,
                 Token = token
             });
         }
 
-        public Task<T> UpdateAsync<T>(TransactionUpdateDTO dto, string token)
+        public Task<T> UpdateAsync<T>(GroupUpdateDTO dto, string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.PUT,
                 Data = dto,
-                Url = transactionUrl + "/api/v2/Transaction/" + dto.Id,
+                Url = groupUrl + "/api/v2/Group/" + dto.Id,
                 Token = token
             });
         }

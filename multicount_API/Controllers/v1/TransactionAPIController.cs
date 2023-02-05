@@ -37,10 +37,10 @@ namespace multicount_API.Controllers.v1
 
         [HttpGet]
         [ResponseCache(CacheProfileName = "Default30")]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetTransactions(
-            [FromQuery(Name = "filterAmount")] float amount,
+            [FromQuery(Name = "filterGroup")] int groupId,
             [FromQuery] string search, int pageSize = 0, int pageNumber = 1)
         {
             _logger.Log("Getting all transactions", "info");
@@ -48,9 +48,9 @@ namespace multicount_API.Controllers.v1
             {
                 var includeProperties = "Category,LocalUser,TransactionsUsers";
                 IEnumerable<Transaction> transactionsList;
-                if (amount > 0)
+                if (groupId > 0)
                 {
-                    transactionsList = await _dbTransaction.GetAllAsync(u => u.Amount == amount, includeProperties: includeProperties, pageSize: pageSize, pageNumber: pageNumber);
+                    transactionsList = await _dbTransaction.GetAllAsync(u => u.GroupId == groupId, includeProperties: includeProperties, pageSize: pageSize, pageNumber: pageNumber);
                 }
                 else transactionsList = await _dbTransaction.GetAllAsync(includeProperties: includeProperties, pageSize: pageSize, pageNumber: pageNumber);
                 if (!string.IsNullOrEmpty(search))

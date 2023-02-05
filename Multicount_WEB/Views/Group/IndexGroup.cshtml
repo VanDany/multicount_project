@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Multicount_WEB.Models.Dto.GroupDTO>
+<br />
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-primary">groups list</h1>
+        </div>
+        <div class="col text-end pt-1">
+            <a asp-controller="Group" asp-action="createGroup" class="btn btn-outline-primary"><i class="bi bi-plus-square-fill"></i>Create new group</a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Group name
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Description</td>
+                    <td>
+                        <a asp-controller="Group" asp-action="GroupValidation" asp-route-GroupId="@item.Id" class="btn btn-success">SELECTIONNER</a>
+                        <a asp-controller="Group" asp-action="UpdateGroup" asp-route-GroupId="@item.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-controller="Group" asp-action="DeleteGroup" asp-route-GroupyId="@item.Id" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

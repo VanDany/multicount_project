@@ -45,7 +45,7 @@ namespace Multicount_WEB.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                 HttpContext.Session.SetString(SD.SessionToken, model.Token);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("IndexGroup", "Group");
             }
             else
             {

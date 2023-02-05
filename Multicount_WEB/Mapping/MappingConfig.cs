@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Multicount_WEB.Models;
 using Multicount_WEB.Models.Dto;
 
 namespace multicount_WEB.Mapping
@@ -13,6 +12,9 @@ namespace multicount_WEB.Mapping
 
             CreateMap<CategoryDTO, LocalUserCreateDTO>().ReverseMap();
             CreateMap<CategoryDTO, CategoryUpdateDTO>().ReverseMap();
+            CreateMap<GroupDTO, GroupUpdateDTO>().ReverseMap();
+            CreateMap<GroupDTO, GroupCreateDTO>().ReverseMap();
+
         }
     }
 }

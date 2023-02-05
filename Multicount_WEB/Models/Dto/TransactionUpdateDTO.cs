@@ -11,6 +11,7 @@ namespace Multicount_WEB.Models.Dto
         public string Description { get; set; }
         [Required]
         public int? CategoryId { get; set; }
+        public int GroupId { get; set; }
         [Required]
         public string Amount { get; set; }
         public DateTime CreatedDate { get; set; }

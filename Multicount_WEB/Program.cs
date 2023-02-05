@@ -26,6 +26,9 @@ builder.Services.AddScoped<ILocalUserService, LocalUserService>();
 builder.Services.AddHttpClient<ITransactionUserService, TransactionUserService>();
 builder.Services.AddScoped<ITransactionUserService, TransactionUserService>();
 
+builder.Services.AddHttpClient<IGroupService, GroupService>();
+builder.Services.AddScoped<IGroupService, GroupService>();
+
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

@@ -27,14 +27,20 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Transaction" asp-action="IndexTransaction">Transactions</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Group" asp-action="IndexGroup">My groups</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="IndexCategory">Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="LocalUser" asp-action="IndexLocalUser">Users</a>
-                        </li>
+                        @if (Convert.ToInt32(httpAcc.HttpContext.Session.GetString("groupId")) != 0)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Transaction" asp-action="IndexTransaction">Transactions</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="IndexCategory">Categories</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="LocalUser" asp-action="IndexLocalUser">Users</a>
+                            </li>                         
+                        }
                         @if (httpAcc.HttpContext.Session.GetString(SD.SessionToken) is not null && httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
                         {
                             <li class="nav-item">

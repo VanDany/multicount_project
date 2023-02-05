@@ -15,6 +15,7 @@ namespace Multicount_WEB.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("groupId", "0");
             return View();
         }
 

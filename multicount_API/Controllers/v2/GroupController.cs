@@ -29,7 +29,7 @@ namespace multicount_API.Controllers.v2
             _response = new APIResponse();
         }
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetGroups()
         {

@@ -34,7 +34,7 @@ namespace Multicount_WEB.Controllers
         public async Task<IActionResult> IndexTransaction()
         {
             List<TransactionDTO> list = new();
-            var response = await _transactionService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
+            var response = await _transactionService.GetAllAsync<APIResponse>(Convert.ToInt32(HttpContext.Session.GetString("groupId")), HttpContext.Session.GetString(SD.SessionToken));
             if (response is not null && response.IsSuccess)
             {
                 list = JsonConvert.DeserializeObject<List<TransactionDTO>>(Convert.ToString(response.Result));
@@ -54,7 +54,6 @@ namespace Multicount_WEB.Controllers
                     Value = i.Id.ToString()
                 });
             }
-
             var responseTransac = await _localUserService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (responseTransac is not null && responseTransac.IsSuccess)
             {
@@ -74,6 +73,8 @@ namespace Multicount_WEB.Controllers
             if (ModelState.IsValid)
             {
                 //var test = HttpContext.User.FindFirstValue("userId");
+                var groupId = Convert.ToInt32(HttpContext.Session.GetString("groupId"));
+                model.Transaction.GroupId = groupId;
                 var userId1 = model.Transaction.UsersId;
                 var response = await _transactionService.CreateAsync<APIResponse>(model.Transaction, HttpContext.Session.GetString(SD.SessionToken));
                 if (response is not null && response.IsSuccess)
@@ -131,6 +132,8 @@ namespace Multicount_WEB.Controllers
         {
             if (ModelState.IsValid)
             {
+                var groupId = Convert.ToInt32(HttpContext.Session.GetString("groupId"));
+                model.Transaction.GroupId = groupId;
                 var response = await _transactionService.UpdateAsync<APIResponse>(model.Transaction, HttpContext.Session.GetString(SD.SessionToken));
                 if (response is not null && response.IsSuccess)
                 {

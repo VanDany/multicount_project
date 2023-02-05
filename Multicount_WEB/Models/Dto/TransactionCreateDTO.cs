@@ -9,6 +9,7 @@ namespace Multicount_WEB.Models.Dto
         [MaxLength(30)]
         public string Description { get; set; }
         public int? CategoryId { get; set; }
+        public int GroupId { get; set; }
         [Required]
         public string Amount { get; set; }
         public List<string> UsersId { get; set; }
