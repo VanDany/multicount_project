@@ -37,7 +37,7 @@ namespace multicount_API.Controllers.v1
 
         [HttpGet]
         [ResponseCache(CacheProfileName = "Default30")]
-        [Authorize]
+        //[Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetTransactions(
             [FromQuery(Name = "filterAmount")] float amount,

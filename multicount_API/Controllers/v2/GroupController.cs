@@ -18,12 +18,14 @@ namespace multicount_API.Controllers.v2
         private readonly ILogging _logger;
         private readonly IMapper _mapper;
         private readonly IGroupRepository _dbGroup;
+        private readonly IGroupUserRepository _dbGroupUser;
 
-        public GroupController(IMapper mapper, ILogging logger, IGroupRepository dbGroup)
+        public GroupController(IMapper mapper, ILogging logger, IGroupRepository dbGroup, IGroupUserRepository dbGroupUser)
         {
             _logger = logger;
             _mapper = mapper;
             _dbGroup= dbGroup;
+            _dbGroupUser= dbGroupUser;
             _response = new APIResponse();
         }
         [HttpGet]
@@ -34,7 +36,16 @@ namespace multicount_API.Controllers.v2
             _logger.Log("Getting all groups", "info");
             try
             {
-                IEnumerable<Group> groupsList = await _dbGroup.GetAllAsync();
+                var includeProperties = "GroupsUsers";
+
+                IEnumerable<Group> groupsList = await _dbGroup.GetAllAsync(includeProperties: includeProperties);
+
+                var groupsUsers =await _dbGroupUser.GetAllAsync();
+                foreach (var g in groupsList)
+                {
+                    g.GroupsUsers = groupsUsers.Where(t => t.GroupId == g.Id).ToList();
+                }
+
                 _response.Result = _mapper.Map<List<GroupDTO>>(groupsList);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);

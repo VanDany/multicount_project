@@ -11,7 +11,7 @@ namespace multicount_API.Models
         [ForeignKey("Group")]
         public int GroupId { get; set; }
         [ForeignKey("LocalUser")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public float Amount { get; set; }
     }
 }

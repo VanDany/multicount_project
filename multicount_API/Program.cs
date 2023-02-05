@@ -28,6 +28,7 @@ builder.Services.AddScoped<ITransactionUserRepository, TransactionUserRepository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILocalUserRepository, LocalUserRepository>();
 builder.Services.AddScoped<IGroupRepository, GroupRepository>();
+builder.Services.AddScoped<IGroupUserRepository, GroupsUsersRepository>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddApiVersioning(options =>
 {

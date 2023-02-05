@@ -10,5 +10,6 @@ namespace multicount_API.Models
         public int Id { get; set; }
         public string CreatorUserId { get; set; }
         public string Description { get; set; }
+        public List<GroupsUsers> GroupsUsers { get; set; }
     }
 }

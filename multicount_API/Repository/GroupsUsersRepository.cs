@@ -6,16 +6,16 @@ using System.Linq.Expressions;
 
 namespace multicount_API.Repository
 {
-    public class GroupsUsersRepository : Repository<GroupsUsers>, IGroupUserRepository
+    public class TransactionUserRepository : Repository<TransactionsUsers>, ITransactionUserRepository
     {
         private readonly ApplicationDbContext _db;
-        public GroupsUsersRepository(ApplicationDbContext db) : base(db)
+        public TransactionUserRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
-        public async Task<GroupsUsers> UpdateAsync(GroupsUsers entity)
+        public async Task<TransactionsUsers> UpdateAsync(TransactionsUsers entity)
         {
-            _db.GroupsUsers.Update(entity);
+            _db.TransactionsUsers.Update(entity);
             await _db.SaveChangesAsync();
             return entity;
         }
