@@ -39,6 +39,8 @@ namespace multicount_API.Mapping
             CreateMap<Group, GroupCreateDTO>().ReverseMap();
             CreateMap<Group, GroupUpdateDTO>().ReverseMap();
 
+            CreateMap<GroupsUsers, GroupsUsersDTO>().ReverseMap();
+
             CreateMap<ApplicationUser, UserDTO>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
